@@ -6,4 +6,10 @@
     <RootNamespace>moje_delo_hackaton</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="vhodi.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

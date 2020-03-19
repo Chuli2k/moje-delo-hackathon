@@ -4,30 +4,7 @@ using System.Linq;
 using System.IO;
 
 /*
- * širina višina besedilo
- * 
- * Vhod:
- * 20 6 led display
- * 100 20 led display 2020
- * 10 20 MUST BE ABLE TO DISPLAY
- * 55 25 Can you hack
- * 100 20 display product text
- * 
- * Izhod:
- * 2
- * 9
- * 1
- * 8
- * 8
- * 
- * 20 100 display product text => 2
- * 
- * Hitro kaj lahko testiram:
- * - maxE = Maksimalna velikost pisave glede na ekran:
- * -- Vzame se min vrednost dimenzij ekrana -> min(širina, višina)
- * - maxB = Maksimalna velikost pisave glede na najdaljšo besedo
- * -- Najdem dolžino najdaljše besede, širino ekrana delim z to dolžino
- *
+ * To še preveri:
  * - maxD(stV) = Maksimalna velikost pisave glede na dolžino besedila, število besed in trenutno število vrstic:
  * -- Seštej dolžine vseh besed
  * -- Prištej število presledkov: <št. presledkov> = <št. vseh besed> - 1 - ( <št. vrstic> - 1 )
@@ -41,8 +18,8 @@ namespace moje_delo_hackaton
     {
         static void Main(string[] args)
         {
-            //var inputFilePath = "vhodi.txt";
-            var inputFilePath = "vhodi-test.txt";
+            var inputFilePath = "vhodi.txt";
+            //var inputFilePath = "vhodi-test.txt";
 
             if (!File.Exists(inputFilePath))
             {
@@ -53,12 +30,11 @@ namespace moje_delo_hackaton
             var lines = File.ReadAllLines(inputFilePath);
             foreach (var line in lines)
             {
-                var vseBesede = line.Split(' ');
-                var besede = new List<string>(vseBesede);
+                var besede = new List<string>(line.Split(' '));
                 besede.RemoveAt(0);
                 besede.RemoveAt(0);
                 var besedeLength = besede.Select(b => b.Length).ToList();
-                Console.WriteLine($"Širina:{vseBesede[0]}; Višina:{vseBesede[1]}; {besede.Aggregate<string>((prev, curr) => prev + " " + curr)} ({besedeLength.Aggregate("", (prev, curr) => prev + " " + curr.ToString())})");
+                Console.WriteLine($"{line} ({besedeLength.Aggregate("", (prev, curr) => prev + " " + curr.ToString())})");
 
                 var (width, height, wordLengths) = ParseLine(line);
                 var f = GetMaxFontSize(width, height, wordLengths.ToList());

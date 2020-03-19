@@ -41,8 +41,8 @@ namespace moje_delo_hackaton
     {
         static void Main(string[] args)
         {
-            var inputFilePath = "vhodi.txt";
-            //var inputFilePath = "vhodi-test.txt";
+            //var inputFilePath = "vhodi.txt";
+            var inputFilePath = "vhodi-test.txt";
 
             if (!File.Exists(inputFilePath))
             {
@@ -99,35 +99,43 @@ namespace moje_delo_hackaton
                 if (CheckFontSize(width, height, wordLengths, maxFontSize))
                     return maxFontSize;
 
-                //Če ja => return(maxFontSize)
-                //Drugače:
                 maxFontSize--;
             }
 
             return maxFontSize;
         }
 
+        /// <summary>
+        /// Preveri, če se podana velikost pisave da prikazat za podane dimenzije ekrana in velikosti besed
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="wordLengths"></param>
+        /// <param name="maxFontSize"></param>
+        /// <returns></returns>
         private static bool CheckFontSize(int width, int height, IList<int> wordLengths, int maxFontSize)
         {
-            //**** Preveri, če se trenutna velikost da prikazat. *****
             //Spremenjljivki za trenutni pozicijo
             var x = 0; //pixel na horizontali
             var y = 0; //V kateri vrstici sem...
             var nrSpaces = -1; //-1 ker, če je samo ena beseda, pomeni, da ni presledkov...
-            int maxLines = height / maxFontSize;
+            
+            //Normalizirana širina in višina glede na velikost pisave.
+            int normWidth = width / maxFontSize;
+            int normHeight = height / maxFontSize;
 
             for (int i = 0; i < wordLengths.Count; i++)
             {
-                x += wordLengths[i] * maxFontSize;
+                x += wordLengths[i];
                 nrSpaces++;
 
                 //Preveri, če je prekoračena širina. Če ja idi v novo vrstico
-                if ((x + nrSpaces * maxFontSize) > width)
+                if ((x + nrSpaces) > normWidth)
                 {
                     //Idi v novo vrstico
                     y++;
 
-                    if (y == maxLines)
+                    if (y == normHeight)
                     {
                         //prekoračil sem število vrstic...
                         return false;

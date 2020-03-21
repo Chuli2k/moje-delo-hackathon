@@ -100,6 +100,11 @@ namespace moje_delo_hackaton
             int normWidth = width / maxFontSize;
             int normHeight = height / maxFontSize;
 
+            //Preverjanje, da je na voljo dovolj prostora za vse znake
+            int area = normWidth * normHeight;
+            int numChars = wordLengths.Sum() + wordLengths.Count - normHeight; //TODO: sum in count bi lahko ven prestavil.
+            if (area < numChars) return false;
+
             for (int i = 0; i < wordLengths.Count; i++)
             {
                 x += wordLengths[i];

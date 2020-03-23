@@ -28,6 +28,9 @@ namespace moje_delo_hackaton
                 //Console.WriteLine($"{line} ({wordLengths.Aggregate("", (prev, curr) => prev + " " + curr.ToString())})");
                 Console.WriteLine(line);
                 results.Add(checker.GetMaxFontSize(width, height, wordLengths));
+                Console.Write($"old:{checker.CheckFontRunCount}; ");
+                results.Add(checker.GetMaxFontSizeAlt(width, height, wordLengths));
+                Console.WriteLine($"new:{checker.CheckFontRunCount}");
             }
 
             Console.WriteLine();

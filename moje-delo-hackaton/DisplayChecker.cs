@@ -87,6 +87,9 @@ namespace moje_delo_hackaton
             int normHeight = DisplayHeight / maxFontSize;
 
             //Preverjanje, da je na voljo dovolj prostora za vse znake
+            //Note: Praviloma bi morala 'Pogojna optimizacija' preprečit, da bi se ta pogoj sploh prožil.
+            //      Ampak, ker tukaj delam z celimi števili, ki so bolj realni, dobim dejansko površino ekrana manjšo.
+            //      Zaradi tega se vseeno splača imet pogoj.
             int area = normWidth * normHeight;
             int numChars = sumWordListSizes + WordListSizes.Count - normHeight;
             if (area < numChars) return false;

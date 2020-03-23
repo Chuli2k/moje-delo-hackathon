@@ -77,8 +77,8 @@ namespace moje_delo_hackaton
         /// <summary>
         /// Iz vidika miniziranja klica funkcije CheckFontSize() je ta najboljša. Vsaj za podane primere.
         /// Formula za maxFont vrne kar dober približek maksimuma in lahko font samo zmanjšujem, dokler ne pridem do rešitve.
-        /// Iz tega vidika iteriranje max fonta z pivot ne pridobimo nič. Vsaj ne na način, da samo razpolavljam. Lahko kako najdem boljši pivot???????
-        /// Edini problem je tu zahtevnost formule. Noter je koren, ki je lahko zahteven.
+        /// Iz tega vidika iteriranje max fonta z pivot ne pridobimo nič. Vsaj ne na način, da samo razpolavljam. Iskanje boljšega pivota pa je isti problem kot računanje formule.
+        /// Edini problem je tu zahtevnost formule. Noter je koren...
         /// </summary>
         /// <param name="displayWidth"></param>
         /// <param name="displayHeight"></param>
@@ -125,12 +125,10 @@ namespace moje_delo_hackaton
 
             //Če je max možno prikazat, potem je to rezultat.
             if (CheckFontSize(maxFontSize)) return maxFontSize;
-            
-            //Če najmanjši možni font ni možno prikazat vrni 0
-            if (!CheckFontSize(1)) return 0;
 
-            //Predpostavljam da je min možno prikazat, max pa ne
+            //Če najmanjši možni font ni možno prikazat vrni 0
             var minFontSize = 1;
+            if (!CheckFontSize(minFontSize)) return 0;
 
             //Izhodni pogoj je recimo pri minF=2 in maxF=3, pri tem je vedno min vrednost pravilna
             while (minFontSize + 1 != maxFontSize)

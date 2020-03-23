@@ -106,7 +106,7 @@ namespace moje_delo_hackaton
 
         /// <summary>
         /// Če se hočemo izognit računanju po formuli je ta funkcija boljša.
-        /// Je enaka kot ta druga, samo da je iskanje fonta narejeno z pivot-om.
+        /// Je enaka kot ta druga, samo da ni računanje max po formuli in iteriranje je narejeno z pivot-om.
         /// </summary>
         /// <param name="displayWidth"></param>
         /// <param name="displayHeight"></param>

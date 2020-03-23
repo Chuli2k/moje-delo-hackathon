@@ -75,8 +75,9 @@ namespace moje_delo_hackaton
         }
 
         /// <summary>
-        /// Iz vidika miniziranja klica funkcije CheckFontSize() je pomoje ta najboljša. Vsaj za podane primere.
+        /// Iz vidika miniziranja klica funkcije CheckFontSize() je ta najboljša. Vsaj za podane primere.
         /// Formula za maxFont vrne kar dober približek maksimuma in lahko font samo zmanjšujem, dokler ne pridem do rešitve.
+        /// Iz tega vidika iteriranje max fonta z pivot ne pridobimo nič. Vsaj ne na način, da samo razpolavljam. Lahko kako najdem boljši pivot???????
         /// Edini problem je tu zahtevnost formule. Noter je koren, ki je lahko zahteven.
         /// </summary>
         /// <param name="displayWidth"></param>

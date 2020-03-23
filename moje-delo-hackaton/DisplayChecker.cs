@@ -5,6 +5,29 @@ using System.Text;
 
 namespace moje_delo_hackaton
 {
+    /*
+     * Pogojna optimizacija:
+     * Iščem font kjer je površina ekrana (normalizirana) enaka površini besedila glede na vrstice (normalizirana).
+     * Predpostavka je, da lahko besede 'optimalno' razporedim v vrstice. Torej ni na koncu vrstic nič več praznega prostora.
+     * S tem lahko preskočim nekaj iteracij preverjanja velikosti fonta. 
+     * To se zgodi v primerih, kjer je rešitev čim bljižje 'optimalnem' izkoristku na zaslonu. Primer je recimo 'You want the truth?...', kjer dobim 30 namesto 70.
+     * Če pa je rešitev takšna, da so prazne vrstice ali zelo kratka beseda v eni vrstici, tako da ni celotna vrstica izpolnjena, potem je ta račun lahko odveč.
+     * 
+     * S = širina
+     * V = višina
+     * F = velikost pisave
+     * Sn = S / F = širina(normalizirana)
+     * Vn = V / F = višina(normalizirana) oz. število vrstic
+     * Ab = <št. besed> + sum(<dolžina besede>) = površina besed
+     * 
+     * A = Sn * Vn = (S * V) / F = Površina ekrana
+     * Ab(F) = Ab - Vn = Ab - (V/F) = Površina besed glede na število vrstic
+     * 
+     * Kdaj je A == Ab(F) ?
+     * Ko => Ab*F^2 - V*F - S*V = 0
+     *    => F = (V - sqrt(V) * sqrt(4*Ab*S + V)) / (2 * Ab)
+     *    => F = (V + sqrt(V) * sqrt(4*Ab*S + V)) / (2 * Ab)
+     */
     public class DisplayChecker
     {
         public int DisplayWidth { get; private set; }
@@ -28,6 +51,14 @@ namespace moje_delo_hackaton
             //Najdi max velikost ekrana glede na najdaljšo besedo, če je manjša kot prej, jo nastavi
             int maxfontSizeByMaxWordLength = DisplayWidth / WordListSizes.Max(); //Celi del deljenja
             if (maxfontSizeByMaxWordLength < maxFontSize) maxFontSize = maxfontSizeByMaxWordLength;
+
+            //Pogojna optimizacija (razlaga odzgoraj):
+            //F = (V + sqrt(V) * sqrt(4*Ab*S + V)) / (2 * Ab)
+            var a = sumWordListSizes + WordListSizes.Count;
+            var f = (DisplayHeight + Math.Sqrt(DisplayHeight) * Math.Sqrt(4 * a * DisplayWidth + DisplayHeight)) / (2 * a);
+            //Console.WriteLine($"init:{maxFontSize}");
+            if (f < maxFontSize) maxFontSize = (int)f;
+            //Console.WriteLine($"init enačba:{f}; maxF:{maxFontSize}");
 
             while (maxFontSize > 0)
             {

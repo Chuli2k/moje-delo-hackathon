@@ -27,7 +27,13 @@ namespace moje_delo_hackaton
                 var (width, height, wordLengths) = ParseLine(line);
                 //Console.WriteLine($"{line} ({wordLengths.Aggregate("", (prev, curr) => prev + " " + curr.ToString())})");
                 Console.WriteLine(line);
+                
                 results.Add(checker.GetMaxFontSize(width, height, wordLengths));
+                //Console.Write($"old:{checker.CheckFontRunCount}; ");
+                
+                //Alternativna metoda. Večkrat se preverja velikost fonta, samo je brez računanja korena...
+                //results.Add(checker.GetMaxFontSizeAlt(width, height, wordLengths));
+                //Console.WriteLine($"new:{checker.CheckFontRunCount}");,
             }
 
             Console.WriteLine();

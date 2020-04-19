@@ -1,3 +1,8 @@
+# Opis
+To je moja rešitev za  hackathon, ki ga je organizirala stran Moje Delo marca 2020.
+
+Nisem dobil nagrade :(
+
 # PRVI PREIZKUS
 ## LedDisplay
 
@@ -20,16 +25,28 @@ Prenesi datoteko: Datoteka vhodi.txt
 Primer delovanja programa
 
 Vhod:
+
 20 6 led display
+
 100 20 led display 2020
+
 10 20 MUST BE ABLE TO DISPLAY
+
 55 25 Can you hack
+
 100 20 display product text
 
-Izhod:2
+Izhod:
+
+2
+
 9
+
 1
+
 8
+
 8
+
 
 Za oddajo rešitve kliknite na gumb "Submit new idea".
